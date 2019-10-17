@@ -1,0 +1,5 @@
+﻿Create Table Clima(
+	dia int primary key,
+	clima varchar(50) not null,
+	perimetro float not null
+)

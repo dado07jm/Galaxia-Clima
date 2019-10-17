@@ -1,0 +1,88 @@
+﻿Declare @dia int, @ferengiX float, @ferengiY float, @betasoideX float, @betasoideY float,
+@vulcanoX float, @vulcanoY float, @solX float, @solY float, @AreaTotal float,
+@AreaABD float,@AreaBCD float,@AreaACD float, @PerimTotal float,
+@PerimAB float,@PerimBC float,@PerimCA float
+
+set @dia = 0
+
+WHILE @dia < 3600
+BEGIN
+
+	set @ferengiX = Round(500 * Cos((-1 * PI() / 180) * @dia),0)
+	set @ferengiY = Round(500 * Sin((-1 * PI() / 180) * @dia),0)
+
+	set @betasoideX = Round(2000 * Cos((-3 * PI() / 180) * @dia),0)
+	set @betasoideY = Round(2000 * Sin((-3 * PI() / 180) * @dia),0)
+
+	set @vulcanoX = Round(1000 * Cos((5 * PI() / 180) * @dia),0)
+	set @vulcanoY = Round(1000 * Sin((5 * PI() / 180) * @dia),0)
+
+	set @solX = Round(0 * Cos((0 * PI() / 180) * @dia),0)
+	set @solY = Round(0 * Sin((0 * PI() / 180) * @dia),0)
+
+
+
+	/*SABER SI ESTAN ALINEADOS*/
+	BEGIN
+	If((@ferengiX=@betasoideX) and (@ferengiX=@vulcanoX))
+		BEGIN
+			If (@ferengiX=@solX)			
+				insert into Clima values (@dia, 'Sequía',0 )	
+			Else 
+				insert into Clima values (@dia, 'óptimo',0 )
+			END
+	Else If((@ferengiY=@betasoideY) and (@ferengiY=@vulcanoY))
+		BEGIN
+			If (@ferengiY=@solY)
+				insert into Clima values (@dia, 'Sequía',0 )	
+			Else 
+				insert into Clima values (@dia, 'óptimo',0 )	
+		END
+	Else If(Round((@betasoideX - @ferengiX) * (@vulcanoY - @betasoideY),0) = 
+		Round((@vulcanoX - @betasoideX) * (@betasoideY - @ferengiY),0))
+
+		BEGIN
+			If ((@betasoideX - @ferengiX) * (@solY - @betasoideY) = 
+				(@solX - @betasoideX) * (@betasoideY - @ferengiY))
+				insert into Clima values (@dia, 'Sequía',0)	
+			Else 
+				insert into Clima values (@dia, 'óptimo',0)
+		END
+	Else
+		BEGIN  
+		/*OBTENER TRIANGULO*/
+		set @AreaTotal = ABS((@ferengiX * @betasoideY + @ferengiY * @vulcanoX +
+					 @betasoideX * @vulcanoY - @betasoideY * @vulcanoX -
+					 @ferengiY * @betasoideX - @ferengiX * @vulcanoY) /2)
+
+
+		set @AreaABD = ABS((@ferengiX * @betasoideY + @ferengiY * @solX +
+					 @betasoideX * @solY - @betasoideY * @solX -
+					 @ferengiY * @betasoideX - @ferengiX * @solY) /2)
+
+
+		set @AreaBCD = ABS((@solX * @betasoideY + @solY * @vulcanoX +
+					 @betasoideX * @vulcanoY - @betasoideY * @vulcanoX -
+					 @solY * @betasoideX - @solX * @vulcanoY) /2)
+
+		set @AreaACD = ABS((@ferengiX * @solY + @ferengiY * @vulcanoX +
+					 @solX * @vulcanoY - @solY * @vulcanoX -
+					 @ferengiY * @solX - @ferengiX * @vulcanoY) /2)
+
+
+		set @PerimAB = ABS(SQRT(POWER(@betasoideX - @ferengiX,2) +POWER(@betasoideY - @ferengiY,2)));
+		set @PerimBC = ABS(SQRT(POWER(@vulcanoX - @betasoideX,2) +POWER(@vulcanoY - @betasoideY,2)));
+		set @PerimCA = ABS(SQRT(POWER(@ferengiX - @vulcanoX,2) +POWER(@ferengiY - @vulcanoY,2)));
+
+		set @PerimTotal = ABS(@PerimAB+@PerimBC+@PerimCA)
+
+		If(@AreaTotal = (@AreaABD + @AreaBCD + @AreaACD))
+			insert into Clima values (@dia, 'Lluvia',@PerimTotal )
+		Else
+			insert into Clima values (@dia, 'no definido',0 )			
+		
+		END
+	END
+	
+	SET @dia = @dia + 1;  
+END
