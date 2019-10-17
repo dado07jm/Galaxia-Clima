@@ -36,7 +36,7 @@ Ej: GET → http://....../clima?dia=566 → Respuesta: {“dia”:566, “clima�
 
 ## RESOLUCION  
 
-*Toda el problema con su explicación lógica se encuentra en el archivo PDF.
+**Toda el problema con su explicación lógica se encuentra en el archivo PDF.**
 
 ### Anotaciones  
 - Ferengi: 360 dias en dar la vuelta
@@ -50,5 +50,13 @@ Ej: GET → http://....../clima?dia=566 → Respuesta: {“dia”:566, “clima�
 
 
 ### API REST
+- Incio de la aplicación: https://meliplanetas.azurewebsites.net
+- Total de días de sequía: https://meliplanetas.azurewebsites.net/Clima/Sequia
+- Total de días de lluvia con los días con Picos Máximos: https://meliplanetas.azurewebsites.net/Clima/Lluvia
+- Total de días de óptimos: https://meliplanetas.azurewebsites.net/Clima/Optimos
 
+**Bonus**
+- JOB se encuentra dentro de la carpeta
+- Devuelve día seleccionado: https://meliplanetas.azurewebsites.net/Clima?dia=560
+- Esta hosteado en Azure que me otorga crédito libre por el período de 1 años. (No encontre un host gratuito para .NET)
 
