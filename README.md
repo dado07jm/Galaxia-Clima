@@ -56,7 +56,7 @@ Ej: GET → http://....../clima?dia=566 → Respuesta: {“dia”:566, “clima�
 - Total de días de óptimos: https://meliplanetas.azurewebsites.net/Clima/Optimos
 
 **Bonus**
-- JOB se encuentra dentro de la carpeta
+- JOB se encuentra dentro de la carpeta "Models"
 - Devuelve día seleccionado: https://meliplanetas.azurewebsites.net/Clima?dia=560
 - Esta hosteado en Azure que me otorga crédito libre por el período de 1 años. (No encontre un host gratuito para .NET)
 
