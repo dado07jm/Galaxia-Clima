@@ -143,6 +143,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Clima\Sequia.cshtml" />
     <Content Include="Views\Clima\Lluvia.cshtml" />
+    <Content Include="Views\Clima\Optimos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

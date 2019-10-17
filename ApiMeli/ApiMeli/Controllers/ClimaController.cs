@@ -49,5 +49,16 @@ namespace ApiMeli.Controllers
             return View();
         }
 
+        // GET: Periodos Sequía
+        [HttpGet]
+        public ActionResult Optimos()
+        {
+            String obtenerdia = "";
+            ClassSql ex = new ClassSql();
+            obtenerdia = ex.diaOptimo();
+            ViewBag.optimo = obtenerdia;
+            return View();
+        }
+
     }
 }

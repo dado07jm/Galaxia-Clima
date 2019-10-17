@@ -12,8 +12,8 @@ namespace ApiMeli.Class
     {
         private String con()
         {
-            return " Server = tcp:************,1433; Initial Catalog = ***********; Persist Security Info = False;" +
-                " User ID = *********; Password =***********; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
+            return " Server = XXXXXXX,1433; Initial Catalog = XXXXXXXX; Persist Security Info = False;" +
+                " User ID = XXXXXXX; Password =XXXXXXXX; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
         }
 
         public String diaparticular (int dia)
@@ -144,7 +144,7 @@ namespace ApiMeli.Class
             }
             else
             {
-                diaOptimo = "No hay días de sequía";
+                diaOptimo = "No hay definido días óptimos";
             }
             return diaOptimo;
 
